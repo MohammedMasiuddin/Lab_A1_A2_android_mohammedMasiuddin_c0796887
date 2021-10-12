@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F3E5F5"
+    android:orientation="vertical"
+    android:padding="15dp"
+    tools:context=".ProductsDetailsFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="The Following are the product details"
+                android:textAlignment="center"
+                android:textSize="24dp" />
+
+            <EditText
+                android:id="@+id/ProductName"
+                style="@android:style/Widget.Material.EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="40dp"
+                android:background="@drawable/round_rect_shape"
+                android:ems="10"
+                android:hint="Enter Product Name"
+                android:inputType="textPersonName"
+                android:padding="10dp"
+                android:textAlignment="center"
+                android:textColor="#6A1B9A"
+                android:textColorHint="#8E24AA" />
+
+            <EditText
+                android:id="@+id/product_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="40dp"
+                android:background="@drawable/round_rect_shape"
+                android:ems="10"
+                android:hint="Enter product description"
+                android:inputType="textPersonName"
+                android:minHeight="48dp"
+                android:padding="10dp"
+                android:text="Name"
+                android:textAlignment="center"
+                android:textColor="#6A1B9A"
+                android:textColorHint="#8E24AA" />
+
+            <EditText
+                android:id="@+id/price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="40dp"
+                android:background="@drawable/round_rect_shape"
+                android:ems="10"
+                android:hint="Enter price of the product"
+                android:inputType="number"
+                android:minHeight="48dp"
+                android:padding="10dp"
+                android:textAlignment="center"
+                android:textColor="#6A1B9A"
+                android:textColorHint="#8E24AA"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <EditText
+                android:id="@+id/provider_phonenumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="40dp"
+                android:background="@drawable/round_rect_shape"
+                android:ems="10"
+                android:hint="enter provider phone number"
+                android:inputType="phone"
+                android:minHeight="48dp"
+                android:padding="10dp"
+                android:textAlignment="center"
+                android:textColor="#6A1B9A"
+                android:textColorHint="#8E24AA" />
+
+            <EditText
+                android:id="@+id/providername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="40dp"
+                android:background="@drawable/round_rect_shape"
+                android:ems="10"
+                android:hint="enter provider name"
+                android:inputType="textPersonName"
+                android:minHeight="48dp"
+                android:padding="10dp"
+                android:text="Name"
+                android:textAlignment="center"
+                android:textColor="#6A1B9A"
+                android:textColorHint="#8E24AA" />
+
+            <EditText
+                android:id="@+id/provider_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="40dp"
+                android:background="@drawable/round_rect_shape"
+                android:ems="10"
+                android:hint="Enter provider address"
+                android:inputType="textPostalAddress"
+                android:minHeight="48dp"
+                android:padding="10dp"
+                android:textAlignment="center"
+                android:textColor="#6A1B9A"
+                android:textColorHint="#8E24AA" />
+
+            <EditText
+                android:id="@+id/provider_emailaddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="40dp"
+                android:background="@drawable/round_rect_shape"
+                android:ems="10"
+                android:hint="Enter provider email address"
+                android:inputType="textEmailAddress"
+                android:minHeight="48dp"
+                android:padding="10dp"
+                android:textAlignment="center"
+                android:textColor="#6A1B9A"
+                android:textColorHint="#8E24AA" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
