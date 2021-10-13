@@ -16,6 +16,11 @@ public interface ProviderDao {
     @Query("Select * from provider")
     List<Provider> getAllProviders();
 
+
+    @Query("Select provider_name from provider")
+    List<String> getAllProvidersnames();
+
+
     @Query("Select * from provider where provider_name = :provider")
     List<Provider> getProviders(String provider);
 

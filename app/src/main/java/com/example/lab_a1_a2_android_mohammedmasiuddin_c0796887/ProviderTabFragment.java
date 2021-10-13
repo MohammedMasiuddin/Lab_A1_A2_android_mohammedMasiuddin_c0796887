@@ -1,21 +1,19 @@
 package com.example.lab_a1_a2_android_mohammedmasiuddin_c0796887;
 
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ProductTabFragment#newInstance} factory method to
+ * Use the {@link ProviderTabFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ProductTabFragment extends Fragment {
+public class ProviderTabFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,9 +23,8 @@ public class ProductTabFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    public Context context;
 
-    public ProductTabFragment() {
+    public ProviderTabFragment() {
         // Required empty public constructor
     }
 
@@ -37,11 +34,11 @@ public class ProductTabFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ProductTabFragment.
+     * @return A new instance of fragment ProviderTabFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ProductTabFragment newInstance(String param1, String param2) {
-        ProductTabFragment fragment = new ProductTabFragment();
+    public static ProviderTabFragment newInstance(String param1, String param2) {
+        ProviderTabFragment fragment = new ProviderTabFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -52,7 +49,6 @@ public class ProductTabFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        context = getContext();
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -63,11 +59,10 @@ public class ProductTabFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_product_tab, container, false);
+        View view = inflater.inflate(R.layout.fragment_provider_tab, container, false);
         getActivity().getSupportFragmentManager().beginTransaction()
-                .replace(R.id.producttablayout, new ProductsListFragment())
+                .replace(R.id.providerTab, new ProviderListFragment())
                 .commit();
-
         return view;
     }
 }

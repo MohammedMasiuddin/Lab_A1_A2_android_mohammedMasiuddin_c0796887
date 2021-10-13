@@ -17,6 +17,9 @@ public interface ProductsDao {
     @Query("Select * from products where product_name like '%'||:s||'%' or product_description like '%'||:s||'%'")
     List<Products> getFilterProducts(String s);
 
+    @Query("Select product_name from products where provider_name = :provider ")
+    List<String> getAllProductsforprovidername( String provider );
+
     @Insert()
     void insertProduct(Products... products);
 

@@ -22,7 +22,7 @@ import com.google.android.material.tabs.TabLayout;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements ProductsListAdapter.ProductitemlistClicked {
+public class MainActivity extends AppCompatActivity implements ProductsListAdapter.ProductitemlistClicked, ProviderListAdapter.ProvideritemlistClicked {
 
     public static String TAG = " In Main Activity: ";
     public static final String My_Pref_File_Name = "com.example.lab_a1_a2_android_mohammedmasiuddin_c0796887.Preferences";
@@ -91,6 +91,11 @@ public class MainActivity extends AppCompatActivity implements ProductsListAdapt
                     }
                 }
         );
+    }
+
+    public void refreshProducts(){
+        NoteAppDatabase app = NoteAppDatabase.getINSTANCE(getApplicationContext());
+        products  = app.productsDao().getAllProducts();
     }
 
     public List<Products> getProducts() {
@@ -167,8 +172,7 @@ public class MainActivity extends AppCompatActivity implements ProductsListAdapt
             public void onClick(View v) {
                 // Manage this event.
 
-                NoteAppDatabase app = NoteAppDatabase.getINSTANCE(getApplicationContext());
-                products  = app.productsDao().getAllProducts();
+                refreshProducts();
                 PagerAdapterMain pam = new PagerAdapterMain(getSupportFragmentManager(), getLifecycle());
                 viewPager.setAdapter(pam);
                 searchView.setQuery("",false);
@@ -176,12 +180,37 @@ public class MainActivity extends AppCompatActivity implements ProductsListAdapt
                 Log.d(TAG, "onClick: eet");
             }
         });
+
+        MenuItem menuItem2 = menu.findItem(R.id.addProducts);
+        menuItem2.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                Log.d(TAG, "onMenuItemClick: ");
+                getSupportFragmentManager().beginTransaction().replace(R.id.producttablayout,ProductsDetailsFragment.newAddProductInstance())
+                        .addToBackStack(null).commit();
+                return false;
+            }
+        });
+
+
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public void productitemClicked(int product_id, String provider_name) {
+//        getSupportFragmentManager().beginTransaction().replace(R.id.producttablayout,ProductsDetailsFragment.newInstance(product_id,provider_name))
+//                .addToBackStack(null).commit();
+
+//        getSupportFragmentManager().beginTransaction().replace(R.id.producttablayout,ProductsDetailsFragment.newInstance(product_id,provider_name))
+//                .addToBackStack(null).commit();
+
         getSupportFragmentManager().beginTransaction().replace(R.id.producttablayout,ProductsDetailsFragment.newInstance(product_id,provider_name))
                 .addToBackStack(null).commit();
-     }
+    }
+
+    @Override
+    public void provideritemClicked(String provider_name) {
+        getSupportFragmentManager().beginTransaction().replace(R.id.providerTab, ProviderProductsFragment.newInstance(provider_name))
+                .addToBackStack(null).commit();
+    }
 }

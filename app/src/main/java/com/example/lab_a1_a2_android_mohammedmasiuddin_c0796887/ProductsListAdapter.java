@@ -49,6 +49,7 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapte
         @Override
         public void onClick(View view) {
             Products p = productslist.get(productslist.indexOf( (Products) view.getTag()));
+
             activity.productitemClicked(p.getProduct_id(),p.provider_name);
         }
     }

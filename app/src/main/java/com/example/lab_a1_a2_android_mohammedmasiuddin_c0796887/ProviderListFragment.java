@@ -3,10 +3,19 @@ package com.example.lab_a1_a2_android_mohammedmasiuddin_c0796887;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.lab_a1_a2_android_mohammedmasiuddin_c0796887.db.NoteAppDatabase;
+import com.example.lab_a1_a2_android_mohammedmasiuddin_c0796887.db.Products;
+import com.example.lab_a1_a2_android_mohammedmasiuddin_c0796887.db.ProviderWithProducts;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +32,9 @@ public class ProviderListFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    RecyclerView recyclerView;
+    RecyclerView.Adapter myadapter;
+    RecyclerView.LayoutManager layoutManager;
 
     public ProviderListFragment() {
         // Required empty public constructor
@@ -59,6 +71,29 @@ public class ProviderListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_provider_list, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_provider_list, container, false);
+
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.providerlist);
+        recyclerView.setHasFixedSize(true);
+
+        layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
+
+        MainActivity activity = (MainActivity) getActivity();
+
+
+        NoteAppDatabase app = NoteAppDatabase.getINSTANCE(getContext().getApplicationContext());
+
+        List<ProviderWithProducts> providers = app.providerDao().getProviderwithProducts();
+
+        Log.d("tag","heinsdkdf"+providers.get(1).provider.provider_name);
+
+
+        myadapter = new ProviderListAdapter(providers,activity);
+        recyclerView.setAdapter(myadapter);
+
+        return  rootView;
     }
+
+
 }

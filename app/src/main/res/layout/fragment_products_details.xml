@@ -18,7 +18,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/textViewProductDetail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="The Following are the product details"
@@ -52,7 +52,6 @@
                 android:inputType="textPersonName"
                 android:minHeight="48dp"
                 android:padding="10dp"
-                android:text="Name"
                 android:textAlignment="center"
                 android:textColor="#6A1B9A"
                 android:textColorHint="#8E24AA" />
@@ -99,7 +98,6 @@
                 android:inputType="textPersonName"
                 android:minHeight="48dp"
                 android:padding="10dp"
-                android:text="Name"
                 android:textAlignment="center"
                 android:textColor="#6A1B9A"
                 android:textColorHint="#8E24AA" />
@@ -133,6 +131,33 @@
                 android:textAlignment="center"
                 android:textColor="#6A1B9A"
                 android:textColorHint="#8E24AA" />
+
+            <Switch
+                android:id="@+id/newproviderswitch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Create new Provider" />
+
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextViewProvider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="40dp"
+                android:background="@drawable/round_rect_shape"
+                android:hint="Select the Providers"
+
+                android:minHeight="48dp"
+                android:padding="10dp"
+                android:textAlignment="center"
+                android:textColor="#6A1B9A"
+                android:textColorHint="#8E24AA"
+                android:visibility="visible" />
+
+            <Button
+                android:id="@+id/product_details_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Button" />
         </LinearLayout>
     </ScrollView>
 

@@ -9,4 +9,10 @@
         android:title="Search"
         app:actionViewClass="android.widget.SearchView" />
 
+    <item
+        android:id="@+id/addProducts"
+        android:icon="@drawable/icon_add"
+        app:showAsAction="ifRoom"
+        android:title="Add Products"
+        />
 </menu>
