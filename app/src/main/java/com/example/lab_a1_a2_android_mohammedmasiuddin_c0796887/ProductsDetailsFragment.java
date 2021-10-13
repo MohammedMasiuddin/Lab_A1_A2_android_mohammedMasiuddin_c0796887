@@ -123,6 +123,24 @@ public class ProductsDetailsFragment extends Fragment {
             autoCompleteTextView.setVisibility(View.INVISIBLE);
             aSwitch.setVisibility(View.INVISIBLE);
 
+            button.setText("Update Product");
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int price = Integer.parseInt(String.valueOf(product_price.getText()));
+                    Products p1 = new Products(productname.getText().toString(), product_des.getText().toString(), price, provider_name.getText().toString());
+
+                    Provider pr1 = new Provider(provider_name.getText().toString(),
+                            provider_email.getText().toString(),
+                            provider_phone.getText().toString(),provider_address.getText().toString());
+
+                    app.productsDao().updateProduct(p1.product_name,p1.product_description,p1.product_price,p1.provider_name,p1.product_id);
+                    app.providerDao().updateProviders(pr1.provider_name,pr1.provider_email_address,pr1.provider_phonenumber,pr1.provider_location);
+                    Toast.makeText(getActivity().getApplicationContext(),"Product has updated successfully",Toast.LENGTH_SHORT).show();
+
+                }
+            });
+
         }
         Log.d("TAG", "onCreateView: ");
         if (mParam1 == -1 && mParam2 == "") {
@@ -143,7 +161,7 @@ public class ProductsDetailsFragment extends Fragment {
                     autoCompleteTextView.showDropDown();
                 }
             });
-
+            button.setText("Add Products");
             aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -171,16 +189,20 @@ public class ProductsDetailsFragment extends Fragment {
 
                     int price = Integer.parseInt(String.valueOf(product_price.getText()));
                     Products p1 = new Products(productname.getText().toString(), product_des.getText().toString(), price, autoCompleteTextView.getText().toString());
-                    app.productsDao().insertProduct(p1);
+                    Log.d("asrt", "onClick: "+productname.getText().toString());
                     if(aSwitch.isChecked()){
                         if(provider_name.getText().toString() == "" || provider_email.getText().toString() == "" || provider_phone.getText().toString() == "" || provider_address.getText().toString() == ""){
                             Toast.makeText(getActivity().getApplicationContext(),"Enter details properly", Toast.LENGTH_SHORT).show();
                             return;
+
                         }
+                         p1 = new Products(productname.getText().toString(), product_des.getText().toString(), price, provider_name.getText().toString());
 
                         Provider pr1 = new Provider(provider_name.getText().toString(),
                                 provider_email.getText().toString(),
                                 provider_phone.getText().toString(),provider_address.getText().toString());
+
+                        Log.d("TAG", "onClick: "+ pr1);
 
                         app.providerDao().insertProviders(pr1);
                         Toast.makeText(getActivity().getApplicationContext(),"Provider has added successfully",Toast.LENGTH_SHORT).show();
@@ -188,6 +210,7 @@ public class ProductsDetailsFragment extends Fragment {
 
                     }
 
+                    app.productsDao().insertProduct(p1);
 
                     Toast.makeText(getActivity().getApplicationContext(),"Product has added successfully",Toast.LENGTH_SHORT).show();
 

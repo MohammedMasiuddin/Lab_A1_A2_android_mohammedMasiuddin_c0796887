@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.lab_a1_a2_android_mohammedmasiuddin_c0796887.db.NoteAppDatabase;
 import com.example.lab_a1_a2_android_mohammedmasiuddin_c0796887.db.Products;
@@ -44,6 +46,8 @@ public class ProductsListFragment extends Fragment {
 
     }
 
+
+
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -69,6 +73,8 @@ public class ProductsListFragment extends Fragment {
         }
     }
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -85,15 +91,20 @@ public class ProductsListFragment extends Fragment {
 //        List<Products> i = activity.getProducts();
 
 
-//        NoteAppDatabase app = NoteAppDatabase.getINSTANCE(context.getApplicationContext());
+        NoteAppDatabase app = NoteAppDatabase.getINSTANCE(context.getApplicationContext());
 
 //        List<Products> products = app.productsDao().getAllProducts();
 
         List<Products> products = activity.getProducts();
         Log.d("TAG", "onCreateView: reload ");
 
+
+
         myadapter = new ProductsListAdapter(context, products);
         recyclerView.setAdapter(myadapter);
+        ItemTouchHelper itemTouchHelper = new
+                ItemTouchHelper(new SwipeToDeleteCallback( (ProductsListAdapter) myadapter));
+        itemTouchHelper.attachToRecyclerView(recyclerView);
 
         return rootView;
     }

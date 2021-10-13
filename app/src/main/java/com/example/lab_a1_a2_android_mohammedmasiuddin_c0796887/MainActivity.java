@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
 
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -17,6 +19,7 @@ import android.widget.SearchView;
 import com.example.lab_a1_a2_android_mohammedmasiuddin_c0796887.db.NoteAppDatabase;
 import com.example.lab_a1_a2_android_mohammedmasiuddin_c0796887.db.Products;
 import com.example.lab_a1_a2_android_mohammedmasiuddin_c0796887.db.Provider;
+import com.example.lab_a1_a2_android_mohammedmasiuddin_c0796887.db.ProviderWithProducts;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 
@@ -212,5 +215,19 @@ public class MainActivity extends AppCompatActivity implements ProductsListAdapt
     public void provideritemClicked(String provider_name) {
         getSupportFragmentManager().beginTransaction().replace(R.id.providerTab, ProviderProductsFragment.newInstance(provider_name))
                 .addToBackStack(null).commit();
+    }
+
+    @Override
+    public void calltoprovider(ProviderWithProducts p) {
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        intent.setData(Uri.parse("tel:"+p.provider.provider_phonenumber));
+        startActivity(intent);
+    }
+
+    @Override
+    public void emailtoprovider(ProviderWithProducts p) {
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:"+p.provider.provider_email_address));
+        startActivity(intent);
     }
 }

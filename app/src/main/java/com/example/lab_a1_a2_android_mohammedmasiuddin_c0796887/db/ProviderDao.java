@@ -33,4 +33,9 @@ public interface ProviderDao {
     @Query("Select * from provider where provider_name = :provider_name")
     public List<ProviderWithProducts> getProviderwithProductsforproductid(String provider_name);
 
+
+    @Query("update provider \n" +
+            "set provider_name=:providername,provider_email_address=:provideremai,provider_location=:location,provider_phonenumber=:providerphone where provider_name =:providername ")
+    void updateProviders(String providername,String provideremai, String providerphone, String location);
+
 }

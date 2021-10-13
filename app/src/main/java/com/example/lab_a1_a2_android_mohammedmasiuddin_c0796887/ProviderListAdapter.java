@@ -1,9 +1,12 @@
 package com.example.lab_a1_a2_android_mohammedmasiuddin_c0796887;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -24,6 +27,8 @@ public class ProviderListAdapter extends RecyclerView.Adapter<ProviderListAdapte
 
     public interface ProvideritemlistClicked {
         void provideritemClicked(String provider_name);
+        void calltoprovider(ProviderWithProducts p);
+        void emailtoprovider(ProviderWithProducts p);
     }
 
     public ProviderListAdapter(List<ProviderWithProducts> providers, ProvideritemlistClicked activity) {
@@ -35,12 +40,32 @@ public class ProviderListAdapter extends RecyclerView.Adapter<ProviderListAdapte
 
         TextView providernames;
         TextView productcount;
+        ImageButton callbuttn;
+        ImageButton emailbutton;
 
         public ViewHolder1(@NonNull View itemView) {
             super(itemView);
             providernames = itemView.findViewById(R.id.Providernamelistitem);
             productcount = itemView.findViewById(R.id.productcountlistitem);
+            callbuttn = itemView.findViewById(R.id.imageButton);
+            emailbutton = itemView.findViewById(R.id.imageButton2);
+            emailbutton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ProviderWithProducts p = providers.get(providers.indexOf( (ProviderWithProducts) itemView.getTag()));
+                    activity.emailtoprovider(p);
+                }
+            });
+            callbuttn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ProviderWithProducts p = providers.get(providers.indexOf( (ProviderWithProducts) itemView.getTag()));
+                    activity.calltoprovider(p);
+                }
+            });
+
             itemView.setOnClickListener(this);
+
         }
 
         @Override

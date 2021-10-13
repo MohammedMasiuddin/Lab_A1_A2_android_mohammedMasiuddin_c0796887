@@ -6,10 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.lab_a1_a2_android_mohammedmasiuddin_c0796887.db.NoteAppDatabase;
 import com.example.lab_a1_a2_android_mohammedmasiuddin_c0796887.db.Products;
 
 import java.util.List;
@@ -18,7 +20,9 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapte
 
     private List<Products> productslist;
     public ProductitemlistClicked activity;
-
+    Context contextA;
+    Products mRecentlyDeletedItem;
+    int mRecentlyDeletedItemPosition;
 
     public interface ProductitemlistClicked {
         void productitemClicked(int product_id, String p);
@@ -26,6 +30,7 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapte
 
     public ProductsListAdapter(Context context, List<Products> list) {
         activity = (ProductitemlistClicked) context ;
+        this.contextA = context;
         productslist = list;
         Log.d("TAG", "ProductsListAdapter: "+context);
     }
@@ -52,6 +57,18 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapte
 
             activity.productitemClicked(p.getProduct_id(),p.provider_name);
         }
+    }
+
+    public void deleteItem(int position) {
+        mRecentlyDeletedItem = productslist.get(position);
+        mRecentlyDeletedItemPosition = position;
+        productslist.remove(position);
+        notifyItemRemoved(position);
+        Log.d("TAG", "deleteItem: "+contextA);
+        NoteAppDatabase app = NoteAppDatabase.getINSTANCE(contextA.getApplicationContext());
+        app.productsDao().deleteProduct(mRecentlyDeletedItem);
+        Toast.makeText(contextA.getApplicationContext(),"Deleted the product",Toast.LENGTH_SHORT).show();
+//        showUndoSnackbar();
     }
 
     @NonNull
